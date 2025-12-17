@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141b3d;
+            --text-primary: #e0e7ff;
+            --text-secondary: #94a3b8;
+            --accent: #00d9ff;
+            --accent-secondary: #00ff88;
+            --accent-tertiary: #bd00ff;
+            --accent-glow: rgba(0, 217, 255, 0.5);
+            --card-bg: rgba(20, 27, 61, 0.8);
+            --border: rgba(0, 217, 255, 0.3);
+        }
+
+        .light-mode {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #0891b2;
+            --accent-secondary: #059669;
+            --accent-tertiary: #7c3aed;
+            --accent-glow: rgba(8, 145, 178, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border: rgba(8, 145, 178, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f4d 50%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .light-mode::before {
+            background: radial-gradient(circle at 20% 50%, rgba(8, 145, 178, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.05) 0%, transparent 50%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .rocket {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            z-index: 2;
+            animation: rocketFly 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rocketFly {
+            0% {
+                left: -100px;
+                top: 80%;
+                transform: rotate(-45deg);
+            }
+
+            50% {
+                left: 50%;
+                top: 20%;
+                transform: rotate(-45deg);
+            }
+
+            100% {
+                left: 110%;
+                top: 10%;
+                transform: rotate(-45deg);
+            }
+        }
+
+        .astronaut {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 2;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                right: -100px;
+                top: 30%;
+                transform: rotate(0deg);
+            }
+
+            25% {
+                right: 20%;
+                top: 20%;
+                transform: rotate(15deg);
+            }
+
+            50% {
+                right: 50%;
+                top: 40%;
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                right: 80%;
+                top: 25%;
+                transform: rotate(20deg);
+            }
+        }
+
+        .shooting-star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-300px, 300px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .light-mode header {
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: 0 0 20px var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .hero {
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-image-container {
+            display: inline-block;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: slideDown 1s ease-out;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+            padding: 4px;
+            box-shadow: 0 0 40px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px var(--accent-glow), 0 0 80px rgba(0, 255, 136, 0.3);
+        }
+
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+            opacity: 0.3;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--accent-secondary) 50%;
+            margin-bottom: 0.5rem;
+            animation: slideDown 1s ease-out 0.2s both;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: slideDown 1s ease-out 0.4s both;
+        }
+
+        .hero h1 .name {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-glow);
+            font-weight: bold;
+        }
+
+        .hero .title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            animation: slideUp 1s ease-out 0.8s both;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 1s ease-out 1s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px var(--accent-glow);
+            border-color: var(--accent-secondary);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            background: var(--bg-secondary);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: width 1s ease;
+        }
+
+        .projects-grid:has(.card:hover) .card:not(:hover) {
+            transform: scale(0.95);
+            opacity: 0.85;
+        }
+
+
+        .projects-grid {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .projects-grid>.card {
+            scroll-snap-align: center;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .projects-grid>.card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(320px, 1fr);
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scroll-behavior: smooth;
+        }
+
+        /* hilangkan scrollbar tapi tetap bisa scroll */
+        .projects-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .projects-grid {
+            scrollbar-width: none;
+        }
+
+        /* PENDEKKAN CARD KHUSUS DESIGN PROCESS */
+        #progress .card {
+            padding: 1.2rem;
+            /* lebih pendek */
+        }
+
+        #progress .project-image {
+            height: 120px;
+            /* dari 200px → pendek */
+        }
+
+        #progress .card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        #progress .card p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+
+
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a1f4d 100%);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            transition: width 0.3s ease;
+        }
+
+        .social-links a:hover::after {
+            width: 100%;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-image img {
+            width: 150px;
+            /* ukuran pasti */
+            height: auto;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a1f4d 100%);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox img {
+            max-width: 80%;
+            max-height: 60%;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .lightbox h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox p {
+            color: #ccc;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .lightbox-btn {
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background: #00d9ff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 32px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars" id="starsContainer"></div>
+
+    <svg class="rocket" viewBox="0 0 100 100">
+        <defs>
+            <linearGradient id="rocketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00d9ff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <path d="M50 10 L60 40 L70 70 L60 75 L50 90 L40 75 L30 70 L40 40 Z" fill="url(#rocketGradient)" stroke="#00d9ff"
+            stroke-width="2" />
+        <circle cx="50" cy="35" r="8" fill="#ffffff" opacity="0.8" />
+        <path d="M30 70 L20 85 L30 80 Z" fill="#ff6b6b" opacity="0.8" />
+        <path d="M70 70 L80 85 L70 80 Z" fill="#ff6b6b" opacity="0.8" />
+        <ellipse cx="50" cy="85" rx="3" ry="8" fill="#ffd93d" opacity="0.6">
+            <animate attributeName="ry" values="8;12;8" dur="0.3s" repeatCount="indefinite" />
+        </ellipse>
+    </svg>
+
+    <svg class="astronaut" viewBox="0 0 100 100">
+        <defs>
+            <linearGradient id="astronautGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00d9ff;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <ellipse cx="50" cy="35" rx="18" ry="20" fill="url(#astronautGradient)" opacity="0.9" />
+        <ellipse cx="50" cy="35" rx="13" ry="15" fill="#1a1f4d" opacity="0.7" />
+        <circle cx="45" cy="33" r="3" fill="#00d9ff" />
+        <circle cx="55" cy="33" r="3" fill="#00d9ff" />
+        <path d="M45 40 Q50 43 55 40" stroke="#00d9ff" stroke-width="2" fill="none" />
+        <rect x="35" y="50" width="30" height="35" rx="8" fill="url(#astronautGradient)" opacity="0.9" />
+        <rect x="25" y="55" width="10" height="25" rx="5" fill="url(#astronautGradient)" opacity="0.9" />
+        <rect x="65" y="55" width="10" height="25" rx="5" fill="url(#astronautGradient)" opacity="0.9" />
+        <circle cx="50" cy="65" r="4" fill="#00ff88" />
+        <line x1="38" y1="58" x2="38" y2="75" stroke="#00d9ff" stroke-width="1" />
+        <line x1="62" y1="58" x2="62" y2="75" stroke="#00d9ff" stroke-width="1" />
+    </svg>
+
+    <header>
+        <nav class="container">
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#progress">Progress</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle">Mode</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="profile-image-container">
+                <div class="profile-image">
+                    <img src="myphoto.jpg" alt="Profile Photo">
+                </div>
+            </div>
+            <h2>Hello There!</h2>
+            <h1>I am <span class="name">Ellail Has Hasshol Haq</span></h1>
+            <p class="title">UI/UX Design Enthusiast</p>
+            <p class="description">Crafting intuitive and engaging digital experiences through thoughtful research,
+                design thinking, and a user-centered approach.</p>
+            <a href="#contact" class="cta-button"><span>Get In Touch</span></a>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="card fade-in">
+                <p>I enjoy turning ideas into clean, meaningful, and visually pleasing interfaces.
+                    For me, design isn’t just about how it looks—it's about crafting experiences that feel effortless
+                    and enjoyable.</p>
+                <p>I'm currently exploring UI/UX more deeply, improving my sense of layout, visual balance, and digital
+                    product styling. Step by step, I’m building the skills to create intuitive designs for both websites
+                    and mobile apps.</p>
+                <p>My focus includes user research, information architecture, wireframing, prototyping, and visual
+                    design. I believe that good design is one that solves real user problems in an elegant and efficient
+                    way.
+                    Let’s create something amazing together!</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Core Competencies</h2>
+            <div class="grid">
+                <div class="card fade-in">
+                    <h3>UI/UX Design</h3>
+                    <p>User Research</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                    <p>Wireframing & Prototyping</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                    <p>Visual Design</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h3>System Analysis</h3>
+                    <p>Requirements Gathering</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                    <p>Process Modeling</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 87%"></div>
+                    </div>
+                    <p>Data Analysis</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <h3>Tools & Technologies</h3>
+                    <p>Figma, Canva</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                    <p>MySql</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                    <p> SDLC Methodologies</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="progress">
+            <h2 class="section-title">Design Process</h2>
+            <div class="projects-grid">
+
+                <div class="card fade-in">
+                    <div class="progress-image">
+                        <img src="burung-hantu.png" alt="research">
+                    </div>
+                    <h3>User Research</h3>
+                    <p>User interviews, surveys, personas, journey mapping</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="progress-image">
+                        <img src="duck.png" alt="wireframing">
+                    </div>
+                    <h3>Wireframing & Prototyping</h3>
+                    <p>Low-fi to high-fi prototypes, interactive mockups</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="progress-image">
+                    <img src="kura-kura.png" alt="visual">
+                    </div>
+                    <h3>Visual Design App</h3>
+                    <p>UI design, design systems, brand identity</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="progress-image">
+                        <img src="harimau.png" alt="testing">
+                    </div>
+                    <h3>Usability Testing</h3>
+                    <p>A/B testing, heuristic evaluation, analytics</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="progress-image">
+                        <img src="kambing.png" alt="edit tools">
+                    </div>
+                    <h3>Design Tools</h3>
+                    <p>Figma, Canva</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="progress-image">
+                        <img src="kucing.png" alt="Interaction Design">
+                    </div>
+                    <h3>Interaction Design</h3>
+                    <p>Micro-interactions, animations, transitions</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="arbana.png" alt="Arbana App" data-title="ARbana App Mobile"
+                            data-desc="Digital travel guide app for historical destinations"
+                            data-link="https://www.figma.com/proto/Arfcl55cn6NghJiLSleBa0/ARbana?node-id=0-1&t=JAelXEW0djdSftYX-1" onclick="openLightbox(this)">
+                    </div>
+                    <h3>ARbana App Mobile</h3>
+                    <p>Arbana is a digital travel guide app that helps users explore historical destinations.</p>
+                </div>
+
+
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="e-learning.png" alt="elearning app"
+                         data-desc="Learning App is a digital platform that helps users learn anytime"
+                            data-link="https://www.figma.com/proto/vut4ABo7HmOiEJ9rpmpEqX/Learning-App?node-id=1-2&t=MBrv4enURAB85X2C-1" onclick="openLightbox(this)">
+                    </div>
+                    <h3>FrameLab Learning</h3>
+                    <p>Learning App is a digital platform that helps users learn anytime and anywhere through
+                        interactive and easy-to-use learning content</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="donut.png" alt="donut"
+                        data-desc="Dashboard animation"
+                            data-link="https://www.figma.com/proto/kr7BIynneZWWqjTxZdrHbu/Redesign-Donat-Animation?node-id=0-1&t=VyZUiW0m9SxfCZcj-1" onclick="openLightbox(this)">
+                    </div>
+                    <h3>Redesign Dashboard Animation</h3>
+                    <p>A modern dashboard redesign with smooth animations that enhances user experience through clean
+                        visuals and responsive interactions.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="klinik.png" alt="web klinik"
+                        data-desc="Web-Based Inventory Control System"
+                            data-link="https://github.com/Ellail30/klinik" onclick="openLightbox(this)">
+                    </div>
+                    <h3>Web-Based Inventory Control System</h3>
+                    <p>A web-based system designed to efficiently manage and monitor inventory stock at Klinik PKU
+                        Muhammadiyah Berbah.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="burger2.png" alt="poster burger"
+                        data-desc="Social Media Design"
+                            data-link="https://www.figma.com/design/s0hBq4zuRfVl7hPR6xpiAe/Product-Design-Burger?node-id=0-1&t=MtWRlIN8W4Mxnedd-1" onclick="openLightbox(this)">
+                    </div>
+                    <h3>Social Media Design</h3>
+                    <p>A creative social media design focused on eye-catching visuals to promote food products and boost
+                        audience engagement.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="project-image">
+                        <img src="payday.png" alt="pay day sale"
+                        data-desc="Social Media Design"
+                            data-link="https://www.figma.com/design/VHIqtcZYhcbgF2DS2L4ZLF/Payday-Sale-Kopi-Fore?node-id=0-1&t=bYi6FqLjzuI37e90-1" onclick="openLightbox(this)">
+                    </div>
+                    <h3>Social Media Design</h3>
+                    <p>A creative social media design focused on eye-catching visuals to promote food products and boost
+                        audience engagement.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="card fade-in" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <p>Interested in collaboration? I'm always open to discussing new projects, creative ideas, or
+                    opportunities.</p>
+                <div class="social-links">
+                    <a href="mailto:ellail301201@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/ellail-has-hasshol-haq-043b792a2" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/Ellail30" target="_blank">GitHub</a>
+                    <a href="https://www.figma.com/@ellailhashassho" target="_blank">Figma</a>
+                    <a href="https://wa.me/6285159376100" target="_blank">WhatsApp</a>
+
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PortfolioEllail All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxTitle').textContent = img.dataset.title;
+            document.getElementById('lightboxDesc').textContent = img.dataset.desc;
+            document.getElementById('lightboxLink').href = img.dataset.link;
+
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create shooting stars
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = Math.random() * 100 + '%';
+            shootingStar.style.top = Math.random() * 50 + '%';
+            shootingStar.style.animation = 'shoot 1s linear forwards';
+            document.body.appendChild(shootingStar);
+
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 1000);
+        }
+
+        setInterval(createShootingStar, 3000);
+
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const mode = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', mode);
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+        }
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+    </script>
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDesc"></p>
+        <a id="lightboxLink" target="_blank" class="lightbox-btn">View Project</a>
+    </div>
+
+</body>
+
+</html>
