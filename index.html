@@ -419,6 +419,60 @@
             overflow: hidden;
             animation: slideUp 1s ease-out 1s both;
         }
+        .hero-actions {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: slideUp 1s ease-out 1s both;
+}
+
+.cv-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--accent-secondary);
+    border: 2px solid var(--accent-secondary);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cv-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(
+        135deg,
+        var(--accent-secondary) 0%,
+        var(--accent) 100%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.cv-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.cv-button:hover {
+    color: var(--bg-primary);
+    box-shadow: 0 0 30px rgba(24, 243, 141, 0.6);
+}
+
+.cv-button span {
+    position: relative;
+    z-index: 1;
+}
+
 
         .cta-button::before {
             content: '';
@@ -448,6 +502,7 @@
             position: relative;
             z-index: 1;
         }
+
 
         section {
             padding: 5rem 0;
@@ -766,6 +821,124 @@
             color: #fff;
             cursor: pointer;
         }
+        /* === RESPONSIVE MOBILE === */
+@media (max-width: 576px) {
+
+  /* Header & Nav */
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero .title {
+    font-size: 1.1rem;
+  }
+
+  .hero .description {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  /* Section */
+  section {
+    padding: 3.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  /* Card */
+  .card {
+    padding: 1.5rem;
+  }
+
+  /* Project & Progress */
+  .projects-grid {
+    gap: 1.2rem;
+  }
+
+  .project-image {
+    height: 160px;
+  }
+
+  .progress-image img {
+    width: 120px;
+  }
+
+  /* Footer */
+  .social-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.95rem;
+  }
+}
+/* === PANAH SLIDER DESIGN PROCESS === */
+.progress-wrapper {
+  position: relative;
+}
+
+.progress-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.progress-arrow:hover {
+  background: rgba(0, 217, 255, 0.3);
+  color: #fff;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.progress-arrow.left {
+  left: -12px;
+}
+
+.progress-arrow.right {
+  right: -12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .progress-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
     </style>
 </head>
 
@@ -835,7 +1008,15 @@
             <p class="title">UI/UX Design Enthusiast</p>
             <p class="description">Crafting intuitive and engaging digital experiences through thoughtful research,
                 design thinking, and a user-centered approach.</p>
-            <a href="#contact" class="cta-button"><span>Get In Touch</span></a>
+<div class="hero-actions">
+    <a href="#contact" class="cta-button">
+        <span>Get In Touch</span>
+    </a>
+
+    <a href="CV-Ellail Has Hasshol Haq.pdf" class="cv-button" target="_blank">
+    <span>View CV</span>
+</a>
+</div>
         </section>
 
         <section id="about">
@@ -906,122 +1087,159 @@
         </section>
 
         <section id="progress">
-            <h2 class="section-title">Design Process</h2>
-            <div class="projects-grid">
+  <h2 class="section-title">Design Process</h2>
 
-                <div class="card fade-in">
-                    <div class="progress-image">
-                        <img src="burung-hantu.png" alt="research">
-                    </div>
-                    <h3>User Research</h3>
-                    <p>User interviews, surveys, personas, journey mapping</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="progress-image">
-                        <img src="duck.png" alt="wireframing">
-                    </div>
-                    <h3>Wireframing & Prototyping</h3>
-                    <p>Low-fi to high-fi prototypes, interactive mockups</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="progress-image">
-                    <img src="kura-kura.png" alt="visual">
-                    </div>
-                    <h3>Visual Design App</h3>
-                    <p>UI design, design systems, brand identity</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="progress-image">
-                        <img src="harimau.png" alt="testing">
-                    </div>
-                    <h3>Usability Testing</h3>
-                    <p>A/B testing, heuristic evaluation, analytics</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="progress-image">
-                        <img src="kambing.png" alt="edit tools">
-                    </div>
-                    <h3>Design Tools</h3>
-                    <p>Figma, Canva</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="progress-image">
-                        <img src="kucing.png" alt="Interaction Design">
-                    </div>
-                    <h3>Interaction Design</h3>
-                    <p>Micro-interactions, animations, transitions</p>
-                </div>
+  <div class="progress-wrapper">
+    <button class="progress-arrow left" onclick="scrollProgress(-1)">❮</button>
 
-            </div>
-        </section>
+    <div class="projects-grid" id="progressScroll">
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="burung-hantu.png" alt="research">
+        </div>
+        <h3>User Research</h3>
+        <p>User interviews, surveys, personas, journey mapping</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="duck.png" alt="wireframing">
+        </div>
+        <h3>Wireframing & Prototyping</h3>
+        <p>Low-fi to high-fi prototypes, interactive mockups</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="kura-kura.png" alt="visual">
+        </div>
+        <h3>Visual Design App</h3>
+        <p>UI design, design systems, brand identity</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="harimau.png" alt="testing">
+        </div>
+        <h3>Usability Testing</h3>
+        <p>A/B testing, heuristic evaluation, analytics</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="kambing.png" alt="tools">
+        </div>
+        <h3>Design Tools</h3>
+        <p>Figma, Canva</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="progress-image">
+          <img src="kucing.png" alt="interaction">
+        </div>
+        <h3>Interaction Design</h3>
+        <p>Micro-interactions, animations, transitions</p>
+      </div>
+
+    </div>
+
+    <button class="progress-arrow right" onclick="scrollProgress(1)">❯</button>
+  </div>
+</section>
+
 
 
         <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="arbana.png" alt="Arbana App" data-title="ARbana App Mobile"
-                            data-desc="Digital travel guide app for historical destinations"
-                            data-link="https://www.figma.com/proto/Arfcl55cn6NghJiLSleBa0/ARbana?node-id=0-1&t=JAelXEW0djdSftYX-1" onclick="openLightbox(this)">
-                    </div>
-                    <h3>ARbana App Mobile</h3>
-                    <p>Arbana is a digital travel guide app that helps users explore historical destinations.</p>
-                </div>
+  <h2 class="section-title">Featured Projects</h2>
 
+  <div class="progress-wrapper">
 
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="e-learning.png" alt="elearning app"
-                         data-desc="Learning App is a digital platform that helps users learn anytime"
-                            data-link="https://www.figma.com/proto/vut4ABo7HmOiEJ9rpmpEqX/Learning-App?node-id=1-2&t=MBrv4enURAB85X2C-1" onclick="openLightbox(this)">
-                    </div>
-                    <h3>FrameLab Learning</h3>
-                    <p>Learning App is a digital platform that helps users learn anytime and anywhere through
-                        interactive and easy-to-use learning content</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="donut.png" alt="donut"
-                        data-desc="Dashboard animation"
-                            data-link="https://www.figma.com/proto/kr7BIynneZWWqjTxZdrHbu/Redesign-Donat-Animation?node-id=0-1&t=VyZUiW0m9SxfCZcj-1" onclick="openLightbox(this)">
-                    </div>
-                    <h3>Redesign Dashboard Animation</h3>
-                    <p>A modern dashboard redesign with smooth animations that enhances user experience through clean
-                        visuals and responsive interactions.</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="klinik.png" alt="web klinik"
-                        data-desc="Web-Based Inventory Control System"
-                            data-link="https://github.com/Ellail30/klinik" onclick="openLightbox(this)">
-                    </div>
-                    <h3>Web-Based Inventory Control System</h3>
-                    <p>A web-based system designed to efficiently manage and monitor inventory stock at Klinik PKU
-                        Muhammadiyah Berbah.</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="burger2.png" alt="poster burger"
-                        data-desc="Social Media Design"
-                            data-link="https://www.figma.com/design/s0hBq4zuRfVl7hPR6xpiAe/Product-Design-Burger?node-id=0-1&t=MtWRlIN8W4Mxnedd-1" onclick="openLightbox(this)">
-                    </div>
-                    <h3>Social Media Design</h3>
-                    <p>A creative social media design focused on eye-catching visuals to promote food products and boost
-                        audience engagement.</p>
-                </div>
-                <div class="card fade-in">
-                    <div class="project-image">
-                        <img src="payday.png" alt="pay day sale"
-                        data-desc="Social Media Design"
-                            data-link="https://www.figma.com/design/VHIqtcZYhcbgF2DS2L4ZLF/Payday-Sale-Kopi-Fore?node-id=0-1&t=bYi6FqLjzuI37e90-1" onclick="openLightbox(this)">
-                    </div>
-                    <h3>Social Media Design</h3>
-                    <p>A creative social media design focused on eye-catching visuals to promote food products and boost
-                        audience engagement.</p>
-                </div>
-            </div>
-        </section>
+    <!-- PANAH KIRI -->
+    <button class="progress-arrow left" onclick="scrollProjects(-1)">❮</button>
+
+    <!-- GRID PROJECT -->
+    <div class="projects-grid" id="projectsScroll">
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="arbana.png" alt="Arbana App" data-title="ARbana App Mobile"
+            data-desc="Digital travel guide app for historical destinations"
+            data-link="https://www.figma.com/proto/Arfcl55cn6NghJiLSleBa0/ARbana?node-id=0-1&t=JAelXEW0djdSftYX-1"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>ARbana App Mobile</h3>
+        <p>Arbana is a digital travel guide app that helps users explore historical destinations.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="e-learning.png" alt="elearning app"
+            data-desc="Learning App is a digital platform that helps users learn anytime"
+            data-link="https://www.figma.com/proto/vut4ABo7HmOiEJ9rpmpEqX/Learning-App?node-id=1-2&t=MBrv4enURAB85X2C-1"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>FrameLab Learning</h3>
+        <p>Learning App is a digital platform that helps users learn anytime and anywhere through
+          interactive and easy-to-use learning content</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="donut.png" alt="donut"
+            data-desc="Dashboard animation"
+            data-link="https://www.figma.com/proto/kr7BIynneZWWqjTxZdrHbu/Redesign-Donat-Animation?node-id=0-1&t=VyZUiW0m9SxfCZcj-1"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>Redesign Dashboard Animation</h3>
+        <p>A modern dashboard redesign with smooth animations that enhances user experience through clean
+          visuals and responsive interactions.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="klinik.png" alt="web klinik"
+            data-desc="Web-Based Inventory Control System"
+            data-link="https://github.com/Ellail30/klinik"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>Web-Based Inventory Control System</h3>
+        <p>A web-based system designed to efficiently manage and monitor inventory stock at Klinik PKU
+          Muhammadiyah Berbah.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="burger2.png" alt="poster burger"
+            data-desc="Social Media Design"
+            data-link="https://www.figma.com/design/s0hBq4zuRfVl7hPR6xpiAe/Product-Design-Burger?node-id=0-1&t=MtWRlIN8W4Mxnedd-1"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>Social Media Design</h3>
+        <p>A creative social media design focused on eye-catching visuals to promote food products and boost
+          audience engagement.</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="project-image">
+          <img src="payday.png" alt="pay day sale"
+            data-desc="Social Media Design"
+            data-link="https://www.figma.com/design/VHIqtcZYhcbgF2DS2L4ZLF/Payday-Sale-Kopi-Fore?node-id=0-1&t=bYi6FqLjzuI37e90-1"
+            onclick="openLightbox(this)">
+        </div>
+        <h3>Social Media Design</h3>
+        <p>A creative social media design focused on eye-catching visuals to promote food products and boost
+          audience engagement.</p>
+      </div>
+
+    </div>
+
+    <!-- PANAH KANAN -->
+    <button class="progress-arrow right" onclick="scrollProjects(1)">❯</button>
+
+  </div>
+</section>
+
 
         <section id="contact">
             <h2 class="section-title">Let's Connect</h2>
@@ -1046,6 +1264,27 @@
             <p>&copy; 2024 PortfolioEllail All rights reserved.</p>
         </div>
     </footer>
+    <script>
+function scrollProjects(direction) {
+  const container = document.getElementById("projectsScroll");
+  container.scrollBy({
+    left: direction * 320,
+    behavior: "smooth"
+  });
+}
+</script>
+
+    <script>
+function scrollProgress(direction) {
+  const container = document.getElementById("progressScroll");
+  const scrollAmount = 320;
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: "smooth"
+  });
+}
+</script>
+
     <script>
         function openLightbox(img) {
             document.getElementById('lightboxImg').src = img.src;
